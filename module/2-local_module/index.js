@@ -1,5 +1,5 @@
 
-import {addition, subtraction, multiplication, division} from "./calculator.js"
+import {addition, subtraction, multiplication, division , modulo} from "./calculator.js"
 
 const add = addition(10, 20)
 console.log("addition" , add)

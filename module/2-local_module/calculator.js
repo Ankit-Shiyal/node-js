@@ -19,4 +19,4 @@ function modulo(a, b) {
     return a % b
 }
 
-export { addition, subtraction, multiplication, division }
+export { addition, subtraction, multiplication, division, modulo }
