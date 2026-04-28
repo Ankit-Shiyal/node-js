@@ -15,4 +15,8 @@ function division(a, b) {
     return a / b
 }
 
-export { addition, subtraction, multiplication, division}
+function modulo(a, b) {
+    return a % b
+}
+
+export { addition, subtraction, multiplication, division }
