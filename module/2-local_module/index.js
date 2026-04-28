@@ -1,11 +1,11 @@
 
-import {addition, subtraction, multiplication, division , modulo} from "./calculator.js"
+import { addition, subtraction, multiplication, division, modulo } from "./calculator.js"
 
-const add = addition(10, 20)
-console.log("addition" , add)
+const add = addition(10, 20);
+console.log("addition", add);
 
-const sub = subtraction(30,15)
-console.log("subtraction", sub)
+const sub = subtraction(30, 15);
+console.log("subtraction", sub);
 
 const mul = multiplication(5, 5)
 console.log("multiplication", mul)
