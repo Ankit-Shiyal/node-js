@@ -12,3 +12,6 @@ console.log("multiplication", mul)
 
 const div = division(20, 2)
 console.log("division", div)
+
+const mod = modulo(50, 2)
+console.log("modulo", mod)
