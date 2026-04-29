@@ -5,7 +5,7 @@ import fs from "fs"
 
 const server = http.createServer((req, res)=>{
 
-    fs.readFile("./index.html", (err, data)=>{
+    fs.readFile("index.html", (err, data)=>{
         if(err){
            return res.end("page note found")
             
