@@ -4,7 +4,8 @@ import http from "http"
 
 const server = http.createServer((req, res)=>{
 
-    res.end("this is server from node js")
+    res.write("this is server from node js")
+    res.end()
 
     
 })
