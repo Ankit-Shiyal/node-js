@@ -4,7 +4,8 @@ import http from "http"
 
 const server = http.createServer((req, res)=>{
 
-    res.end("this is server")
+    res.end("this is server from node js")
+
     
 })
 
@@ -17,5 +18,7 @@ server.listen(port,(err)=>{
         return
     }
 
+
+    console.log("server")
 
 })
