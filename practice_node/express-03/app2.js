@@ -1,18 +1,24 @@
 
 
+
+
 import express from "express"
 
 const app = express()
 
 app.get("/", (req ,res)=>{
 
-    res.send("this is practice home page")
+    res.json({
+        message: "this is home page"
+    })
 
 })
 
 app.get("/about", (req ,res)=>{
 
-    res.send("this is practice about page")
+    res.json({
+        message : "this is about page"
+    })
 
 })
 
