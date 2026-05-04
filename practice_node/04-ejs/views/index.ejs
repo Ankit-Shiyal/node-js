@@ -18,6 +18,15 @@
 
             <li><%=s.name%></li>
 
+            <a href="/edit/<%=s.id%>"> Edit</a>
+
+            <form action="/delete/<%=s.id%>" method="POST">
+
+                <button>delete</button>
+
+            </form>
+
+
             <%}) %>
 
     </ul>
