@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +16,20 @@
     <ul>
         <%studentList.forEach((s)=>{%>
 
-            <li><%=s.name%></li>
+            <li>
+                <%=s.name%>
+            </li>
+
+
+            <a href="/edit/<%= s.id %>" >
+                Edit
+            </a>
+
+
+            <form action="/delete/<%= s.id %>" method="POST">
+                <button >Delete</button>
+            </form>
+
 
             <%}) %>
 

@@ -39,6 +39,43 @@ app.post("/add", (req, res) => {
   res.redirect("/")
 })
 
+
+app.get("/edit/:id", (req, res) => {
+  const id = Number(req.params.id);
+
+  const student = studentList.find((s) => s.id === id);
+
+  if (!student) {
+    return res.send("Student not found ");
+  }
+
+  res.render("edit", { student });
+});
+
+app.post("/update/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const { name } = req.body;
+
+  const student = studentList.find((s) => s.id === id);
+
+  if (student) {
+    student.name = name;
+  }
+
+  res.redirect("/");
+});
+
+app.post("/delete/:id", (req, res) => {
+  const id = Number(req.params.id);
+  studentList = studentList.filter((s) => s.id !== id);
+
+  res.redirect("/");
+});
+
+
+
+
+
 const port = 5000
 
 app.listen(port,(err)=>{
