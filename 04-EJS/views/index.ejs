@@ -1,41 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+
+    <style>
+
+    </style>
+
+
 </head>
 
 <body>
 
-    <h1>Student List</h1>
 
-    <a href="add"> add student data </a>
-
-    <ul>
-        <%studentList.forEach((s)=>{%>
-
-            <li>
-                <%=s.name%>
-            </li>
+    <div class="container  d-flex justify-content-center align-items-center " style="height: 100vh;">
 
 
-            <a href="/edit/<%= s.id %>" >
-                Edit
-            </a>
+
+        <div class="div shadow p-5 w-50  d-flex flex-column">
+            <h1 class="text-center mb-5">Student List</h1>
 
 
-            <form action="/delete/<%= s.id %>" method="POST">
-                <button >Delete</button>
-            </form>
+
+            <ul>
+                <%studentList.forEach((s)=>{%>
+
+                    <div class="d-flex  justify-content-between ">
+
+                        <li class="d-flex justify-content-between align-items-center mb-2">
+        
+                           <h5> <%=s.name%></h5>
+                
+                        </li>
+
+                        <div class="div d-flex mb-2 gap-3">
+                            <a href="/edit/<%= s.id %>" class="btn btn-outline-info">
+                                Edit
+                            </a>
 
 
-            <%}) %>
+                            <form action="/delete/<%= s.id %>" method="POST">
+                                <button class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                        
 
-    </ul>
+                    </div>
+
+                    <%}) %>
+
+            </ul>
+
+            <a href="add" class="btn btn-outline-primary "> Add Student Data </a>
 
 
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

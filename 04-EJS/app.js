@@ -5,17 +5,21 @@ const app = express()
 
 app.set("view engine", "ejs")
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
-let studentList=[
-    {
-        id : 1,
-        name : "ankit"
-    },
-    {
-        id : 2,
-        name: "amit"
-    }
+let studentList = [
+  {
+    id: 1,
+    name: "Ankit"
+  },
+  {
+    id: 2,
+    name: "Dharmik"
+  }, 
+  {
+    id: 3,
+    name: "Amit"
+  }
 ]
 
 app.get("/", (req, res) => {
@@ -78,10 +82,10 @@ app.post("/delete/:id", (req, res) => {
 
 const port = 5000
 
-app.listen(port,(err)=>{
+app.listen(port, (err) => {
 
-    if(err){
-        console.log(err.message)
-    }
-    console.log("server is running")
+  if (err) {
+    console.log(err.message)
+  }
+  console.log("server is running")
 })
