@@ -32,6 +32,13 @@ app.use((req, res) => {
 
 // centralized error Middleware
 
+app.use((err, req, res, next) => {
+    console.log(err.message)
+
+    res
+        .status(error.statusCode || 500)
+        .json({ message: error.message || "internal server error" });
+});
 
 
 
