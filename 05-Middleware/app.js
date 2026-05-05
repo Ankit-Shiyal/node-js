@@ -33,15 +33,6 @@ app.use((req, res) => {
 // centralized error Middleware
 
 
-app.use((error, req, res, next) => {
-  if (req.headersSent) {
-    next(error);
-  }
-  res
-    .status(error.statusCode || 500)
-    .json({ message: error.message || "internal server error" });
-});
-
 
 
 const port = 5000
