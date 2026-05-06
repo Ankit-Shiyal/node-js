@@ -21,11 +21,11 @@ const taskList =[
 
 ]
 
-app.get("/", (req, res,next)=>{
+app.get("/", (req, res)=>{
     res.send("hello from server")
 })
 
-app.get("/taskList", (error, req, res, next)=>{
+app.get("/taskList", (req, res)=>{
     if(taskList.length ===0){
         return res.status(200).json({
             message: "Task not available"
@@ -33,7 +33,7 @@ app.get("/taskList", (error, req, res, next)=>{
     }
 
      res
-    .status(error.statusCode || 500)
+    .status(200)
     .json({message : "task list" , taskList});
 })
 
