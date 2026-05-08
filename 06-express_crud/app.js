@@ -38,6 +38,21 @@ app.get("/taskList", (req, res)=>{
 })
 
 
+app.use((req, res, next)=>{
+    return next(new httpError ("requested route not found", 404))
+})
+
+app.use((error, req, res, next)=>{
+    if(res.headersSent){
+        return next(error)
+    }
+
+    res.status(error.statusCode || 500).json({
+        message: error.message || "something want wrong please try again"
+    })
+})
+
+
 const port = 5000
 
 app.listen(port, (err)=>{
