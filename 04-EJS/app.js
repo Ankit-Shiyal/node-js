@@ -1,10 +1,7 @@
-
 import express from "express"
-
 const app = express()
 
 app.set("view engine", "ejs")
-
 app.use(express.urlencoded({ extended: true }))
 
 let studentList = [
@@ -15,7 +12,7 @@ let studentList = [
   {
     id: 2,
     name: "Dharmik"
-  }, 
+  },
   {
     id: 3,
     name: "Amit"
@@ -42,7 +39,6 @@ app.post("/add", (req, res) => {
 
   res.redirect("/")
 })
-
 
 app.get("/edit/:id", (req, res) => {
   const id = Number(req.params.id);
@@ -75,7 +71,6 @@ app.post("/delete/:id", (req, res) => {
 
   res.redirect("/");
 });
-
 
 const port = 5000
 
