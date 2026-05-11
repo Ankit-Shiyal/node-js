@@ -2,7 +2,6 @@
 
 import express from "express"
 import httpError from "./middleware/httpError.js"
-import e from "express"
 
 const app = express()
 
