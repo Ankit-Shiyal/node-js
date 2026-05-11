@@ -73,6 +73,38 @@ app.post("/addTask", (req, res, next) => {
 
 
 
+app.patch("/update/:id", (req, res, next) => {
+    const id = Number(req.params.id)
+
+    const taskData = taskList.find((t) => t.id === id)
+
+    if (!task) {
+        return next(new httpError("task not found with this id", 404))
+    }
+
+    const { task, description } = req.body
+
+    if (task) {
+        taskData.task = task;
+    }
+
+    if (description) {
+        taskData.description = description;
+    }
+
+    if (!task || !description) {
+        return next(new HttpError("task or description data is required", 400));
+    }
+
+    res.status(200).json({
+        success: true,
+        message: "task data updated successfully",
+        taskData,
+
+    })
+})
+
+
 
 app.delete("/taskList/:id", (req, res, next) => {
 

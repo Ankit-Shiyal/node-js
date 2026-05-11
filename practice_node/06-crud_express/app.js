@@ -69,49 +69,81 @@ app.post("/addTask", (req, res, next) => {
 
 })
 
-app.delete("/taskList/:id", (req, res, next) => {
 
+app.patch("/update/:id", (req, res, next) => {
     const id = Number(req.params.id)
 
-    const index = taskList.findIndex((t) => t.id === id)
+    const taskData = taskList.find((t) => t.id === id)
 
-    if (index === -1) {
-        return next(new httpError("requested route not found", 404))
+    if (!task) {
+        return next(new httpError("task not found with this id", 404))
     }
 
-    taskList.splice(index, 1)
+    const { task, description } = req.body
+
+    if (task) {
+        taskData.task = task;
+    }
+
+    if (description) {
+        taskData.description = description;
+    }
+
+    if (!task || !description) {
+        return next(new HttpError("task or description data is required", 400));
+    }
 
     res.status(200).json({
         success: true,
-        message: "task data deleted successfully"
+        message: "task data updated successfully",
+        taskData,
+
     })
 })
 
+    app.delete("/taskList/:id", (req, res, next) => {
 
+        const id = Number(req.params.id)
 
+        const index = taskList.findIndex((t) => t.id === id)
 
+        if (index === -1) {
+            return next(new httpError("requested route not found", 404))
+        }
 
-app.use((req, res, next) => {
-    return next(new httpError("requested route note found", 400))
-})
+        taskList.splice(index, 1)
 
-app.use((error, req, res, next) => {
-    if (res.headerSent) {
-        return next(error)
-    }
-
-    res.status(error.statusCode || 500).json({
-        message: error.message || "something want wrong "
+        res.status(200).json({
+            success: true,
+            message: "task data deleted successfully"
+        })
     })
 
-})
 
-const port = 5000
 
-app.listen(port, (err) => {
-    if (err) {
-        console.log(err.message)
-    }
 
-    console.log(`server running on port ${port}`)
-})
+
+    app.use((req, res, next) => {
+        return next(new httpError("requested route note found", 400))
+    })
+
+    app.use((error, req, res, next) => {
+        if (res.headerSent) {
+            return next(error)
+        }
+
+        res.status(error.statusCode || 500).json({
+            message: error.message || "something want wrong "
+        })
+
+    })
+
+    const port = 5000
+
+    app.listen(port, (err) => {
+        if (err) {
+            console.log(err.message)
+        }
+
+        console.log(`server running on port ${port}`)
+    })
