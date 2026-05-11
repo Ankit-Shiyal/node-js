@@ -32,3 +32,15 @@ A simple Student Management CRUD API built using Node.js and Express.js with cus
 ├── package.json
 ├── package-lock.json
 └── .gitignore
+---
+Read data
+
+<img width="721" height="457" alt="Screenshot 2026-05-11 173956" src="https://github.com/user-attachments/assets/d9ce5c8a-8e56-4c71-a4c9-260ff9aabea9" />
+
+---
+Create
+<img width="721" height="402" alt="Screenshot 2026-05-11 174122" src="https://github.com/user-attachments/assets/679172ef-558e-4a00-bad7-84d5d90b6986" />
+
+---
+
+---
