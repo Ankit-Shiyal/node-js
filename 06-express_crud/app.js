@@ -71,8 +71,6 @@ app.post("/addTask", (req, res, next) => {
     .json({ success: true, message: "new Task added successfully", newTask });
 });
 
-
-
 app.patch("/updateTask/:id", (req, res, next) => {
   const id = Number(req.params.id);
 
@@ -103,8 +101,6 @@ app.patch("/updateTask/:id", (req, res, next) => {
   });
 });
 
-
-
 app.delete("/taskList/:id", (req, res, next) => {
 
     const id = Number(req.params.id)
@@ -123,8 +119,6 @@ app.delete("/taskList/:id", (req, res, next) => {
     })
 
 })
-
-
 
 app.use((req, res, next)=>{
     return next(new httpError ("requested route not found", 404))
