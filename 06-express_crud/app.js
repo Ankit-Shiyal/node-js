@@ -32,7 +32,7 @@ app.get("/taskList", (req, res, next)=>{
 
      res
     .status(200)
-    .json({message : "task list" , taskList});
+    .json({message : "taskList" , taskList});
 })
 
 
