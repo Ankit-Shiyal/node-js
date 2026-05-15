@@ -1,10 +1,9 @@
 
 import express from "express"
 
+
 import HttpError from "./middleware/httpError.js"
 import connectDB from "./config/db.js";
-
-
 
 const app = express();
 
@@ -15,7 +14,6 @@ app.get("/", (req, res) => {
 });
 
 
-
 app.use((req, res, next)=>{
     return next(new HttpError("requested route not found", 404))
 })
@@ -24,16 +22,15 @@ app.use((error, req, res, next)=>{
     if(res.headersSent){
         return next(error)
     }
-
     res.status(error.statusCode || 500).json({
         message: error.message || "something want wrong please try again"
     })
 })
 
+
 const port = 5000;
 
 async function startServer() {
-
     try{
         await connectDB();
         app.listen(port, (err) => {
