@@ -3,9 +3,13 @@ import express from "express";
 import HttpError from "./middleware/httpError.js"
 import connectDB from "./config/db.js"
 
+import employeeRoutes from "./routes/employeeRoutes.js"
+
 const app = express()
 
 app.use(express.json())
+
+app.use("/employee", employeeRoutes)
 
 app.get("/", (req, res, next) => {
     res.status(200).json("hello from server")
