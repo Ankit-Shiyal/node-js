@@ -5,9 +5,13 @@ import express from "express"
 import HttpError from "./middleware/httpError.js"
 import connectDB from "./config/db.js";
 
+import studentRoutes from "./routes/studentRoutes.js"
+
 const app = express();
 
 app.use(express.json());
+
+app.use("/student", studentRoutes)
 
 app.get("/", (req, res) => {
     res.status(200).json("hello from server");

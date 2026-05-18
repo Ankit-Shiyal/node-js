@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 async function connectDB() {
   try {
-    const connect = await mongoose.connect("mongodb://localhost/:27017/Student");
+    const connect = await mongoose.connect("mongodb://localhost:27017/Student");
 
     console.log("db connected");
 
