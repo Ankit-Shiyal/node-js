@@ -9,5 +9,6 @@ router.post("/add", employeeController.add);
 router.get("/getAllEmployee", employeeController.getAllEmployeeData);
 router.get("/:id", employeeController.employeeById),
 router.delete("/:id", employeeController.deleteById)
+router.patch("/:id", employeeController.updateById)
 
 export default router;

@@ -53,7 +53,7 @@ const employeeById = async(req, res, next)=>{
         
         const {id}= req.params;
 
-        const employeeData= await employee.find(id)
+        const employeeData= await employee.findById(id)
 
         if(!employeeData){
             return next(new HttpError("employee not found with this id", 404))
@@ -83,4 +83,22 @@ const deleteById = async(req, res, next)=>{
     }
 }
 
-export default { add, getAllEmployeeData, employeeById, deleteById };
+const updateById = async(req, res, next)=>{
+    try {
+        
+        const {id}= req.params;
+
+        const employeeData = await employee.findByIdAndUpdate(id,req.body,{new:true})
+
+        if(!employeeData){
+            return next(new HttpError("employee not found with this id", 404))
+        }
+        res.status(200).json({success: true, message:"employee data update successfully" , employeeData})
+
+    } catch (error) {
+        next (new HttpError (error.message, 500))
+    }
+}
+
+
+export default { add, getAllEmployeeData, employeeById, deleteById, updateById };
