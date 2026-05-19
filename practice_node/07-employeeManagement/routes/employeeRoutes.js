@@ -6,7 +6,8 @@ import employeeController from "../controller/employeeController.js";
 const router = express.Router();
 
 router.post("/add", employeeController.add);
-
 router.get("/getAllEmployee", employeeController.getAllEmployeeData);
+router.get("/:id", employeeController.employeeById),
+router.delete("/:id", employeeController.deleteById)
 
 export default router;

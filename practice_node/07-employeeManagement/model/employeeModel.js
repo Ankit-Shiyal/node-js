@@ -21,7 +21,7 @@ const employeeSchema = new mongoose.Schema({
         trim: true
     },
 
-    course: {
+    filed: {
         type: String,
         required: true,
 
@@ -29,7 +29,8 @@ const employeeSchema = new mongoose.Schema({
             "Fullstack Development",
             "Graphic Design",
             "Video Editing",
-            "Ui/UX"
+            "Ui/UX",
+            "web Development"
         ],
 
         default: "Fullstack Development"

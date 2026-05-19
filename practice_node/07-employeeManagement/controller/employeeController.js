@@ -1,7 +1,7 @@
 
 import HttpError from "../middleware/httpError.js"
-
 import employee from "../model/employeeModel.js"
+
 
 const add = async (req, res, next) => {
     try {
@@ -48,4 +48,39 @@ const getAllEmployeeData = async (req, res, next) => {
     }
 };
 
-export default { add, getAllEmployeeData };
+const employeeById = async(req, res, next)=>{
+    try {
+        
+        const {id}= req.params;
+
+        const employeeData= await employee.find(id)
+
+        if(!employeeData){
+            return next(new HttpError("employee not found with this id", 404))
+        }
+
+        res.status(200).json({success: true, message:"employee found", employeeData})
+
+    } catch (error) {
+        next(new HttpError(error.message, 500))
+    }
+}
+
+const deleteById = async(req, res, next)=>{
+    try {
+        
+        const {id}= req.params;
+
+        const employeeData = await employee.findByIdAndDelete(id)
+
+        if(!employeeData){
+            return next(new HttpError("employee not found with this id", 404))
+        }
+        res.status(200).json({success: true, message:"employee data delete successfully"})
+
+    } catch (error) {
+        next (new HttpError (error.message, 500))
+    }
+}
+
+export default { add, getAllEmployeeData, employeeById, deleteById };
