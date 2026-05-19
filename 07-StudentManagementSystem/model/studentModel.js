@@ -29,7 +29,8 @@ const studentSchema = new mongoose.Schema({
             "Fullstack Development",
             "Graphic Design",
             "Video Editing",
-            "Ui/UX"
+            "Ui/UX",
+            "web Development"
         ],
 
         default: "Fullstack Development"
