@@ -8,6 +8,7 @@ route.post("/add", studentController.add)
 route.get("/getStudent", studentController.getAllStudentData)
 route.get("/:id", studentController.studentById)
 route.delete("/:id", studentController.deleteById)
+route.patch("/:id",studentController.updateById)
 
 
 export default route
