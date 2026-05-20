@@ -2,14 +2,14 @@
 import express from "express"
 
 import studentController from "../controller/studentController.js"
-const route = express.Router()
+const router = express.Router()
 
-route.post("/add", studentController.add)
-route.get("/getStudent", studentController.getAllStudentData)
-route.get("/:id", studentController.studentById)
-// route.delete("/:id", studentController.deleteById)
-// route.patch("/:id",studentController.updateById)
-route.patch("/:id", studentController.updateManually)
-route.delete("/allDelete",studentController.deleteAllStudent);
+router.post("/add", studentController.add)
+router.get("/getStudent", studentController.getAllStudentData)
+router.get("/:id", studentController.studentById)
+// router.delete("/:id", studentController.deleteById)
+// router.patch("/:id",studentController.updateById)
+router.patch("/:id", studentController.updateManually)
+router.delete("/allDelete",studentController.deleteAllStudent);
 
-export default route
+export default router
