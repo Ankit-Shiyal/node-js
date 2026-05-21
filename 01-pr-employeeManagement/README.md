@@ -94,23 +94,23 @@ This project helps manage employee information with complete **CRUD operations**
 
 ### POST
 
-<img width="721" height="413" alt="Screenshot 2026-05-21 114241" src="https://github.com/user-attachments/assets/c8201877-6df7-4fb3-a0bb-bb00048c40ee" />
+<img width="720" height="413" alt="Screenshot 2026-05-21 114241" src="https://github.com/user-attachments/assets/c8201877-6df7-4fb3-a0bb-bb00048c40ee" />
 
 ---
 
 ## 📋 Get All Employees
-<img width="500" height="455" alt="Screenshot 2026-05-21 114313" src="https://github.com/user-attachments/assets/950ce948-19f0-4ffc-b556-e115de462566" />
+<img width="720"  alt="Screenshot 2026-05-21 114313" src="https://github.com/user-attachments/assets/950ce948-19f0-4ffc-b556-e115de462566" />
 
 
 
 ## ✏️ Update Employee
 
-<img width="697" height="399" alt="Screenshot 2026-05-21 114051" src="https://github.com/user-attachments/assets/c355449e-3f1d-4f43-af90-51ba180b08c9" />
+<img width="720" height="399" alt="Screenshot 2026-05-21 114051" src="https://github.com/user-attachments/assets/c355449e-3f1d-4f43-af90-51ba180b08c9" />
 
 
 ## ❌ Delete Employee
 
-<img width="721" height="313" alt="Screenshot 2026-05-21 114127" src="https://github.com/user-attachments/assets/2080641a-6a8c-4691-9b0e-eb67b7af95c1" />
+<img width="720" height="313" alt="Screenshot 2026-05-21 114127" src="https://github.com/user-attachments/assets/2080641a-6a8c-4691-9b0e-eb67b7af95c1" />
 
 # 🗄 Employee Schema
 
