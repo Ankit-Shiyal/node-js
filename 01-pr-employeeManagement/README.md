@@ -104,8 +104,11 @@ This project helps manage employee information with complete **CRUD operations**
 
 
 ## ✏️ Update Employee
-
+### Update by id
 <img width="720" height="399" alt="Screenshot 2026-05-21 114051" src="https://github.com/user-attachments/assets/c355449e-3f1d-4f43-af90-51ba180b08c9" />
+
+### Update manually
+<img width="720" height="377" alt="Screenshot 2026-05-21 113950" src="https://github.com/user-attachments/assets/b84afd2f-2a3a-413a-ad9a-4e7cdd91dc77" />
 
 
 ## ❌ Delete Employee
