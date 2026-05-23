@@ -48,4 +48,22 @@ const getAllEmployee = async (req, res, next) => {
     }
 }
 
-export default { add, getAllEmployee }
+const employeeById= async(req, res, next)=>{
+
+    try {
+        const {id}= req.params;
+
+        const EmployeeData = await Employee.findById(id)
+
+        if(!EmployeeData){
+            return next (new HttpError ("Employee not found with this id", 404))
+        }
+
+        res.status(200).json({success:true , message:"Employee data", EmployeeData})
+
+    } catch (error) {
+        next (new HttpError(error.message), 500)
+    }
+}
+
+export default { add, getAllEmployee, employeeById }
