@@ -9,6 +9,7 @@ router.post("/add", EmployeeControllers.add)
 router.get("/allEmployee", EmployeeControllers.getAllEmployee)
 
 router.get("/:id", EmployeeControllers.employeeById)
+router.delete("/:id", EmployeeControllers.deleteById)
 
 
 export default router
