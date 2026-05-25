@@ -10,6 +10,7 @@ router.get("/allEmployee", EmployeeControllers.getAllEmployee)
 
 router.get("/:id", EmployeeControllers.employeeById)
 router.delete("/:id", EmployeeControllers.deleteById)
+router.patch("/:id", EmployeeControllers.updateManually)
 
 
 export default router

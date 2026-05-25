@@ -87,4 +87,48 @@ const deleteById = async(req,res, next)=>{
 
 }
 
-export default { add, getAllEmployee, employeeById ,deleteById}
+const updateManually = async(req, res, next)=>{
+
+    try {
+        
+        const {id} =req.params;
+
+        const EmployeeData = await Employee.findById(id)
+
+        if(!EmployeeData){
+            return next(new HttpError ("Employee not found with this id", 404))
+        }
+
+        const updates = Object.keys(req.body);
+
+        const allowedFiled =[
+            "name",
+            "email",
+            "phoneNumber"
+        ] 
+
+        const idValidUpdate= updates.every((field)=>{
+            return allowedFiled.includes(field);
+        })
+
+        if(!allowedFiled){
+            return next(new HttpError("only allowed field can update", 404 ))
+        }
+
+        updates.forEach((update)=>{
+            EmployeeData[update]=req.body[update]
+        })
+
+        await EmployeeData.save();
+
+        res.status(200).json({ success:true, message:"Employee data update successfully" , EmployeeData})
+
+    } catch (error) {
+        next (new HttpError(error.message), 500)
+        
+
+    }
+
+}
+
+export default { add, getAllEmployee, employeeById ,deleteById ,updateManually}
