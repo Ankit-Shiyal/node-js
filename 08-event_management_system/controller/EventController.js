@@ -9,9 +9,9 @@ const Events = async (req, res, next) => {
 
         const { EventName, Date, EventVenue, EventDescription, ticketPrice } = req.body
 
-        const EventPoster =req.files.EventPoster || []
-        const EventBanner = req.files.EventBanner?.[0]
-        const EventSpiker = req.files.EventSpiker || []
+        const EventPoster =req.files?.EventPoster || []
+        const EventBanner = req.files?.EventBanner?.[0]
+        const EventSpiker = req.files?.EventSpiker || []
 
         const newEvent = new Event({
 
@@ -20,10 +20,9 @@ const Events = async (req, res, next) => {
             EventVenue,
             EventDescription,
             ticketPrice,
-
-            EventPoster: EventPoster.map((file) => file.path) || null,
-            EventBanner: EventBanner?.path || null,
-            EventSpiker: EventSpiker.map((file) => file.path) || null,
+            EventPoster,
+            EventBanner,
+            EventSpiker,
         })
 
         await newEvent.save();
