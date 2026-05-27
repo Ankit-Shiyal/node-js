@@ -1,5 +1,5 @@
 
-
+import fs from "fs";
 import HttpError from "../middleware/HttpError.js";
 import Event from "../model/EventModel.js";
 
