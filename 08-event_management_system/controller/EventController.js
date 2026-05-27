@@ -1,5 +1,4 @@
 
-import fs from "fs";
 import HttpError from "../middleware/HttpError.js";
 import Event from "../model/EventModel.js";
 
@@ -9,9 +8,10 @@ const Events = async (req, res, next) => {
 
         const { EventName, Date, EventVenue, EventDescription, ticketPrice } = req.body
 
-        const EventPoster =req.files?.EventPoster || []
-        const EventBanner = req.files?.EventBanner?.[0]
-        const EventSpiker = req.files?.EventSpiker || []
+        const EventPoster = req.files.EventPoster.map((file) => file.path)
+        const EventBanner = req.files.EventBanner[0].path;
+        const EventSpiker = req.files.EventSpiker.map((file) => file.path)
+
 
         const newEvent = new Event({
 
@@ -36,4 +36,4 @@ const Events = async (req, res, next) => {
 
 }
 
-export default {Events};
+export default { Events };
