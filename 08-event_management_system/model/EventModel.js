@@ -22,20 +22,28 @@ const eventSchema = new mongoose.Schema({
     ticketPrice:{
         type:Number,
         required:true,
-
     },
+    EventImages:{
+        type:[String],
+        required:true
+    },
+
     EventPoster:{
-        type:[string],
+        type:[String],
         required:true
     },
     EventBanner:{
-        type:string,
+        type:String,
         required:true
     },
     EventSpiker:{
-        type:[string],
+        type:[String],
         required:true
     },
+    EventDocument:{
+        type:[String],
+        required:true
+    }
 
 },
 {

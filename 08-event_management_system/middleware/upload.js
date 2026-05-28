@@ -1,21 +1,31 @@
 
 import multer from "multer";
 
-import path from "path";
-
-import HttpError from "./HttpError.js";
+import fs from "fs";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads");
+        // cb(null, "uploads");
+
+        let folderName = "uploads/";
+
+        if (file.foldername === "EventImages"){
+           foldername += "EventImages"
+        } else if (file.foldername === "EventPoster"){
+            foldername += "EventPoster"
+        }else if (file.foldername === "EventBanner"){
+            foldername += "EventBanner"
+        }else if(file.foldername === "EventSpiker"){
+            foldername += "EventSpiker"
+        }else if(file.foldername === "EventDocument"){
+            foldername += "EventDocument"
+        }else{
+            foldername = "others"
+        }
+
+    fs.mkdirSync(foldername, { recursive: true });
+
+    cb(null, foldername);
+
     },
-
-    filename: function (req, file, cb) {
-
-        const EventImages = req.file?.req.files.map((file) => file.path) || null
-        const EventPoster = req.file?.req.files[0].path || null
-        const EventSpiker = req.file?.req.files.map((file) => file.path) || null
-    }
-
-
 })
