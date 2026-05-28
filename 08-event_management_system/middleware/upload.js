@@ -1,31 +1,67 @@
-
 import multer from "multer";
-
 import fs from "fs";
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        // cb(null, "uploads");
 
-        let folderName = "uploads/";
+  destination: (req, file, cb) => {
 
-        if (file.foldername === "EventImages"){
-           foldername += "EventImages"
-        } else if (file.foldername === "EventPoster"){
-            foldername += "EventPoster"
-        }else if (file.foldername === "EventBanner"){
-            foldername += "EventBanner"
-        }else if(file.foldername === "EventSpiker"){
-            foldername += "EventSpiker"
-        }else if(file.foldername === "EventDocument"){
-            foldername += "EventDocument"
-        }else{
-            foldername = "others"
-        }
+    let folderName = "uploads/";
 
-    fs.mkdirSync(foldername, { recursive: true });
+    if (file.fieldname === "EventImages") {
+      folderName += "EventImages";
+    } 
+    else if (file.fieldname === "EventPoster") {
+      folderName += "EventPoster";
+    } 
+    else if (file.fieldname === "EventBanner") {
+      folderName += "EventBanner";
+    } 
+    else if (file.fieldname === "EventSpiker") {
+      folderName += "EventSpiker";
+    } 
+    else if (file.fieldname === "EventDocument") {
+      folderName += "EventDocument";
+    } 
+    else {
+      folderName += "others";
+    }
 
-    cb(null, foldername);
+    fs.mkdirSync(folderName, { recursive: true });
 
-    },
-})
+    cb(null, folderName);
+  },
+
+  filename: (req, file, cb) => {
+
+    const uniqueName =
+      file.fieldname + "-" + Date.now() + "-" + file.originalname;
+
+    cb(null, uniqueName);
+  },
+
+});
+
+const fileFilter = (req, file, cb) => {
+
+  const allowedTypes = [   
+    "image/jpg",
+    "image/jpeg",
+    "image/png",
+    "application/pdf",
+    
+  ];
+
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type"), false);
+  }
+};
+
+const upload = multer({
+     storage, 
+    fileFilter,  
+    limits: { fileSize: 5 * 1024 * 1024 },
+ });
+
+export default upload;

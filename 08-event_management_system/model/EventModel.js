@@ -52,7 +52,7 @@ timestamps:true
 
 
 const Event = mongoose.model(
-    "Event Schema",
+    "Event",
     eventSchema
 )
 
