@@ -41,4 +41,24 @@ const Events = async (req, res, next) => {
 
 }
 
-export default { Events };
+
+const getAllEvent = async (req, res, next)=>{
+
+    try {
+        
+        const EventData = await Event.find({})
+
+        if(!EventData){
+            return next(new HttpError ("Event data not Available" , 404))
+        }
+
+        res.status(200).json({success:true , message:"Event data", EventData})
+
+    } catch (error) {
+        next(new HttpError(error.message, 500))
+
+        
+    }
+}
+
+export default { Events, getAllEvent };

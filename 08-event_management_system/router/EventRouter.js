@@ -19,4 +19,6 @@ router.post(
   EventController.Events
 );
 
+router.get("/AllEvents", EventController.getAllEvent)
+
 export default router;
