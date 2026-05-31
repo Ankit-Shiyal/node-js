@@ -61,4 +61,8 @@ const getAllEvent = async (req, res, next)=>{
     }
 }
 
+const getById =async (req ,res ,next)=>{
+    
+}
+
 export default { Events, getAllEvent };
