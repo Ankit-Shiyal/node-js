@@ -4,16 +4,16 @@ const eventSchema = new mongoose.Schema({
 
     EventName: {
         type: String,
-        // required: true,
+        required: true,
         trim: true
     },
     Date:{
         type:Date,
-        // required:true
+        required:true
     },
     EventVenue:{
         type: String,   
-        // required:true,
+        required:true,
         trim:true
     },
     EventDescription:{
@@ -21,28 +21,28 @@ const eventSchema = new mongoose.Schema({
     },
     ticketPrice:{
         type:Number,
-        // required:true,
+        required:true,
     },
     EventImages:{
         type:[String],
-        // required:true
+        required:true
     },
 
     EventPoster:{
         type:[String],
-        // required:true
+        required:true
     },
     EventBanner:{
         type:String,
-        // required:true
+        required:true
     },
     EventSpiker:{
         type:[String],
-        // required:true
+        required:true
     },
     EventDocument:{
         type:[String],
-        // required:true
+        required:true
     }
 
 },

@@ -1,4 +1,5 @@
 
+import { memoryStorage } from "multer";
 import HttpError from "../middleware/HttpError.js";
 import Event from "../model/EventModel.js";
 
@@ -28,7 +29,7 @@ const Events = async (req, res, next) => {
 
         await newEvent.save();
 
-        res.status(201).json({ success: true, message: "Event Added Successfully", newEvent });
+        res.status(201).json({ success: true,message: "Event Added Successfully", newEvent });
     } catch (error) {
         next(new HttpError(error.message, 500))
     }
@@ -47,7 +48,7 @@ const getAllEvent = async (req, res, next)=>{
             return next(new HttpError ("Event data not Available" , 404))
         }
 
-        res.status(200).json({success:true , message:"Event data", EventData})
+        res.status(200).json({success:true , Total: EventData.length , message:"Event data", EventData})
 
     } catch (error) {
         next(new HttpError(error.message, 500))
@@ -58,6 +59,23 @@ const getAllEvent = async (req, res, next)=>{
 
 const getById =async (req ,res ,next)=>{
 
+    try {
+         const { id } = req.params;
+        
+        const EventData = await Event.findById(id)
+
+        if(!EventData){
+            return next(new HttpError("Event Data not found", 404))
+        }
+
+        res.status(200).json({success:true, message:"Event Data", EventData})
+
+    } catch (error) {
+        next(new HttpError(error.message, 500))
+
+        
+    }
+
 }
 
-export default { Events, getAllEvent };
+export default { Events, getAllEvent, getById };
