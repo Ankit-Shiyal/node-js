@@ -21,5 +21,6 @@ router.post(
 
 router.get("/AllEvents", EventController.getAllEvent)
 router.get("/:id",EventController.getById)
+router.delete("/:id",EventController.deleteEvent)
 
 export default router;
