@@ -88,7 +88,7 @@ const deleteEvent = async (req, res, next) => {
         }
 
 
-        if (deletedEvent.EventImages && deletedEvent.EventPoster.length > 0) {
+        if (deletedEvent.EventImages && deletedEvent.EventImages.length > 0) {
             deletedEvent.EventImages.forEach(file => {
                 fs.unlinkSync(file);
             });
