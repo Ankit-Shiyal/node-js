@@ -160,16 +160,11 @@ const updateEvent = async (req, res, next) => {
                 new HttpError("only allowed field can be updated", 400));
         }
 
-
         const EventImages = req.files?.EventImages?.map((file) => file.path) || null
         const EventPoster = req.files?.EventPoster?.map((file) => file.path) || null
         const EventBanner = req.files?.EventBanner?.[0]?.path || null;
         const EventSpiker = req.files?.EventSpiker?.map((file) => file.path) || null
         const EventDocument = req.files?.EventDocument?.map((file) => file.path) || null
-
-
-
-
 
         if (EventImages) {
 
@@ -220,6 +215,7 @@ const updateEvent = async (req, res, next) => {
         });
 
         await EventData.save();
+
         res.status(200).json({
             success: true,
             message: "Event updated successfully",
@@ -230,9 +226,5 @@ const updateEvent = async (req, res, next) => {
         next(new HttpError(error.message, 500))
 
     }
-
 }
-
-
-
 export default { Events, getAllEvent, getById, deleteEvent, updateEvent };
