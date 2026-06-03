@@ -28,7 +28,7 @@ const eventSchema = new mongoose.Schema({
         required:true
     },
 
-    EventPoster:{
+    EventBanner:{
         type:[String],
         required:true
     },

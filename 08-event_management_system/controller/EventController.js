@@ -78,6 +78,7 @@ const getById = async (req, res, next) => {
     }
 
 }
+
 const deleteEvent = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -125,6 +126,7 @@ const deleteEvent = async (req, res, next) => {
         next(new HttpError(error.message, 500));
     }
 };
+
 
 
 
