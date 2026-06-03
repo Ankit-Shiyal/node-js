@@ -160,54 +160,59 @@ const updateEvent = async (req, res, next) => {
                 new HttpError("only allowed field can be updated", 400));
         }
 
-        const EventImages = req.files?.EventImages?.map((file) => file.path) || null
-        const EventPoster = req.files?.EventPoster?.map((file) => file.path) || null
-        const EventBanner = req.files?.EventBanner?.[0]?.path || null;
-        const EventSpiker = req.files?.EventSpiker?.map((file) => file.path) || null
-        const EventDocument = req.files?.EventDocument?.map((file) => file.path) || null
 
-        if (EventImages) {
-
-            EventData.EventImages.forEach(file => {
+        if (req.files?.EventImages) {
+            EventData.EventImages.forEach((file) => {
                 if (fs.existsSync(file)) {
                     fs.unlinkSync(file);
                 }
             });
 
-            EventData.EventImages = EventImages;
+            EventData.EventImages =
+                req.files?.EventImages?.map((file) => file.path) || null;
         }
 
-        if (EventPoster) {
 
-            EventData.EventPoster.forEach(file => {
+        if (req.files?.EventPoster) {
+            EventData.EventPoster.forEach((file) => {
                 if (fs.existsSync(file)) {
-                    fs.unlinkSync(file);
+                    fs.unlinkSync(file)
                 }
-            });
-        }
-        if (EventBanner) {
+            })
 
-            if (fs.existsSync(EventData.EventBanner)) {
-                fs.unlinkSync(EventData.EventBanner);
-            }
+            EventData.EventPoster =
+                req.files?.EventPoster?.map((file) => file.path) || null;
+
         }
 
-        if (EventSpiker) {
+        if (req.files?.EventBanner) {
+             fs.unlinkSync(EventData.EventBanner);
 
-            EventData.EventSpiker.forEach(file => {
+            EventData.EventBanner = req.files?.EventBanner?.[0]?.path || null
+        }
+
+        if (req.files?.EventSpiker) {
+            EventData.EventSpiker.forEach((file) => {
                 if (fs.existsSync(file)) {
-                    fs.unlinkSync(file);
+                    fs.unlinkSync(file)
                 }
-            });
+            })
+
+            EventData.EventSpiker =
+                req.files?.EventSpiker?.map((file) => file.path) || null;
+
         }
 
-        if (EventDocument) {
-
-            EventData.EventDocument.forEach(file => {
+        if (req.files?.EventDocument) {
+            EventData.EventDocument.forEach((file) => {
                 if (fs.existsSync(file)) {
-                    fs.unlinkSync(file);
+                    fs.unlinkSync(file)
                 }
-            });
+            })
+
+            EventData.EventDocument =
+                req.files?.EventDocument?.map((file) => file.path) || null;
+
         }
 
         updates.forEach((update) => {
