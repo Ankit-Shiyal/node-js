@@ -1,7 +1,7 @@
 import express from "express"
 
 import HttpError from "./middlewares/HttpError.js"
-
+import router from "./router/packageRouter.js";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 
@@ -11,6 +11,7 @@ const app = express()
 
 app.use(express.json());
 
+app.use("/package", router);
 
 app.get("/", (req, res) => {
     res.json({ message: "hello from server" })

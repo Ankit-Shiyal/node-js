@@ -38,6 +38,6 @@ const packageScheme = new mongoose.Schema({
     timestamps:true
 })
 
-const package = mongoose.model("package", packageScheme)
+const PackageModel = mongoose.model("package", packageScheme)
 
-export default package;
+export default PackageModel;
