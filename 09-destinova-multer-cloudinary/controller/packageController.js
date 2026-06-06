@@ -31,6 +31,26 @@ const addPackage = async (req, res, next) => {
     } catch (error) {
         next(new HttpError(error.message, 500));
     }
+
+    
+const getPackage = async (req, res, next) => {
+
+    try {
+
+        const packageData = await PackageModel.find({})
+
+        if (!packageData) {
+            return next(new HttpError("package data not Available", 404))
+        }
+
+        res.status(200).json({ success: true, Total: EventData.length, message: "package data", packageData })
+
+    } catch (error) {
+        next(new HttpError(error.message, 500))
+
+
+    }
+}
 }
 
 export default { addPackage}
