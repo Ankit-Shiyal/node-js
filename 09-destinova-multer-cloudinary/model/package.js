@@ -1,5 +1,5 @@
 
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose from "mongoose";
 
 const packageScheme = new mongoose.Schema({
 

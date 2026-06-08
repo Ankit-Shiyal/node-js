@@ -1,11 +1,13 @@
 import express from "express"
+import dotenv from "dotenv";
+
+dotenv.config({ path: "./.env" });
+
 
 import HttpError from "./middlewares/HttpError.js"
 import router from "./router/packageRouter.js";
 import connectDB from "./config/db.js";
-import dotenv from "dotenv";
 
-dotenv.config({ path: "./.env" });
 
 const app = express()
 

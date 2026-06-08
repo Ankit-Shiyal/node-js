@@ -1,11 +1,9 @@
 
-
+import { v2 as cloudinary } from "cloudinary";
 
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });
-
-import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -13,6 +11,7 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-// console.log("cloud name", process.env.CLOUD_NAME);
-
+// console.log(process.env.CLOUD_NAME);
+// console.log(process.env.CLOUD_API_KEY);
+// console.log(process.env.CLOUD_API_SECRET);
 export default cloudinary;
