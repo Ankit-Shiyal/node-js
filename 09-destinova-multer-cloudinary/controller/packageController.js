@@ -33,7 +33,7 @@ const addPackage = async (req, res, next) => {
 
     } catch (error) {
 
-        console.log("ERROR =>", error); // 👈 આ line add કરો
+        console.log("ERROR =>", error); 
 
         next(new HttpError(error.message, 500));
     }
