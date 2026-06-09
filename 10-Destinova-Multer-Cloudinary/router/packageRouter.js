@@ -11,4 +11,6 @@ router.post("/add", upload.single("packageImages"), packageController.add);
 router.get("/allPackage", packageController.getAllPackage)
 router.get("/:id", packageController.getById)
 
+router.delete("/:id", packageController.deletePackage)
+
 export default router;

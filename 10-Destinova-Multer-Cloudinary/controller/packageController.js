@@ -104,4 +104,34 @@ const getById = async (req, res, next) => {
 
 
 
-export default { add, getAllPackage ,getById};
+const deletePackage = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deletedPackages = await PackageModels.findById(id);
+
+        if (!deletedPackages) {
+            return next(new HttpError("Event not found", 404));
+        }
+
+        
+
+
+
+
+
+        
+
+        await PackageModels.findByIdAndDelete(id);
+
+        res.status(200).json({ success: true, message: "package deleted successfully" });
+
+
+    } catch (error) {
+        next(new HttpError(error.message, 500));
+    }
+};
+
+
+
+
+export default { add, getAllPackage ,getById, deletePackage };
