@@ -130,33 +130,29 @@ This project allows users to manage events with complete CRUD operations and upl
 
 ### Add Event
 
-```http
-POST /event/add
-```
+
+<img width="474" height="268" alt="Screenshot 2026-06-09 112053" src="https://github.com/user-attachments/assets/d68e2c33-474d-467d-adf8-a2779b9372ae" />
+
+
+
 
 ### Get All Events
 
-```http
-GET /event/allEvent
-```
+<img width="471" height="293" alt="Screenshot 2026-06-09 112114" src="https://github.com/user-attachments/assets/2f62088f-5350-4a91-9cdf-c39960e58976" />
 
 ### Get Event By ID
+<img width="473" height="287" alt="Screenshot 2026-06-09 112145" src="https://github.com/user-attachments/assets/ee462ffb-a846-46d0-9453-1915cdd8a9cd" />
 
-```http
-GET /event/:id
-```
 
 ### Update Event
 
-```http
-PATCH /event/:id
-```
+<img width="466" height="313" alt="Screenshot 2026-06-09 112435" src="https://github.com/user-attachments/assets/5f4772b6-8d49-45d0-b1cb-c890e3240611" />
+
 
 ### Delete Event
 
-```http
-DELETE /event/:id
-```
+<img width="472" height="203" alt="Screenshot 2026-06-09 112347" src="https://github.com/user-attachments/assets/50ff827f-cae9-414b-990f-7cd94840f833" />
+
 
 ---
 
@@ -169,41 +165,6 @@ DELETE /event/:id
 | EventPoster   | Single Image    |
 | EventSpeaker  | Multiple Images |
 | EventDocument | PDF File        |
-
----
-
-## ⚙️ Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/EventManagement.git
-```
-
-### Move Into Project
-
-```bash
-cd EventManagement
-```
-
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Create Environment File
-
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-```
-
-### Start Development Server
-
-```bash
-npm run dev
-```
 
 ---
 
@@ -267,7 +228,3 @@ You can test APIs using:
 ## 👨‍💻 Author
 
 ### Ankit Shiyal
-
-Aspiring Full Stack Developer passionate about building scalable backend applications using Node.js, Express.js, MongoDB, and modern web technologies.
-
-⭐ If you like this project, don't forget to give it a star on GitHub.
