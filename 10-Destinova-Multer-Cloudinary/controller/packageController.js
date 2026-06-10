@@ -3,6 +3,8 @@ import PackageModels from "../model/packageModel.js";
 
 import HttpError from "../middleware/HttpError.js";
 
+import cloudinary from "../config/cloudinary.js";
+
 const add = async (req, res, next) => {
     try {
         const {
@@ -15,14 +17,14 @@ const add = async (req, res, next) => {
 
         } = req.body;
 
-        console.log(
-            packageName,
-            packagePrice,
-            packageDestination,
-            StartDate,
-            EndDate,
-            packageDescription,
-        );
+        // console.log(
+        //     packageName,
+        //     packagePrice,
+        //     packageDestination,
+        //     StartDate,
+        //     EndDate,
+        //     packageDescription,
+        // );
 
         if (
             !packageName ||
@@ -47,6 +49,7 @@ const add = async (req, res, next) => {
             EndDate,
             packageDescription,
             packageImages: req.file.path,
+            cloudinary_id: req.file.filename,
         });
 
         await newPackage.save();
@@ -85,7 +88,7 @@ const getById = async (req, res, next) => {
 
     try {
 
-        const {id} = req.params
+        const { id } = req.params
 
         const PackageData = await PackageModels.findById(id)
 
@@ -93,7 +96,7 @@ const getById = async (req, res, next) => {
             return next(new HttpError("package data not Available", 404))
         }
 
-        res.status(200).json({ success: true,  message: "package data", PackageData })
+        res.status(200).json({ success: true, message: "package data", PackageData })
 
     } catch (error) {
         next(new HttpError(error.message, 500))
@@ -113,15 +116,9 @@ const deletePackage = async (req, res, next) => {
             return next(new HttpError("Event not found", 404));
         }
 
-        
+        await cloudinary.uploader.destroy(deletedPackages.cloudinary_id);
 
-
-
-
-
-        
-
-        await PackageModels.findByIdAndDelete(id);
+        await deletedPackages.deleteOne();
 
         res.status(200).json({ success: true, message: "package deleted successfully" });
 
@@ -134,4 +131,6 @@ const deletePackage = async (req, res, next) => {
 
 
 
-export default { add, getAllPackage ,getById, deletePackage };
+
+
+export default { add, getAllPackage, getById, deletePackage };
