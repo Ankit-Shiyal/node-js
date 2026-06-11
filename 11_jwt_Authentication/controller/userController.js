@@ -8,6 +8,7 @@ const add = async (req, res, next)=>{
         const {name, Email , password}= req.body
 
         const newUser = new modelUser({
+            
             name,
             Email,
             password
@@ -15,7 +16,7 @@ const add = async (req, res, next)=>{
 
         await newUser.save()
 
-        res.status(202).json({success:true , message:"new User added successfully", newUser})
+        res.status(201).json({success:true , message:"new User added successfully", newUser})
     } catch (error) {
          next(new HttpError(error.message, 500));
         
