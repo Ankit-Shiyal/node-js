@@ -24,7 +24,46 @@ const add = async (req, res, next)=>{
 
 }
 
-export default {add}
+
+const getAllUser = async (req, res, next)=>{
+
+    try {
+        
+        const Users = await modelUser.find();
+
+        if(!Users){
+            return next(new HttpError ("not user data found", 404))
+        }
+
+        res.status(200).json({success : true, Total:Users.length ,message:"User data found ", Users})
+
+    } catch (error) {
+         next(new HttpError(error.message, 500));
+    }
+}
+
+const login = async (req, res, next)=>{
+
+    try {
+        
+
+        const {Email, password}= req.body;
+
+        const Users = await modelUser.findByCredentials(Email , password)
+
+        if(!Users){
+            return next (new HttpError ("unable to login"))
+        }
+
+        res.status(200).json({success:true, Users})
+
+    } catch (error) {
+         next(new HttpError(error.message, 500));
+        
+    }
+}
+
+export default {add , getAllUser, login}
 
 
 

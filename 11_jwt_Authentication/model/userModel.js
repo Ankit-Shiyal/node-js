@@ -25,18 +25,43 @@ const userScheme = new mongoose.Schema({
             }
         }
     }
-}, 
-{
-    timestamps: true
-})
+},
+    {
+        timestamps: true
+    })
 
 userScheme.pre("save", async function () {
-  const user = this;
+    const user = this;
 
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
+    if (user.isModified("password")) {
+        user.password = await bcrypt.hash(user.password, 10);
+    }
 });
+
+userScheme.statics.findByCredentials = async function (Email, password) {
+
+    try {
+
+        const user = await this.findOne({ Email })
+
+        if (!user) {
+            throw new Error("unable to login");
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+            throw new Error("unable to login");
+        }
+
+
+        return user;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+
+}
+
 
 const modelUser = mongoose.model("user", userScheme)
 
