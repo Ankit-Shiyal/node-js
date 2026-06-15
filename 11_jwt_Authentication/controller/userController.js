@@ -50,17 +50,33 @@ const login = async (req, res, next)=>{
 
         const Users = await modelUser.findByCredentials(Email , password)
 
+         const token = await Users.generateAuthToken();
+
         if(!Users){
             return next (new HttpError ("unable to login"))
         }
 
-        res.status(200).json({success:true, Users})
+        res.status(200).json({success:true, Users, token})
 
     } catch (error) {
          next(new HttpError(error.message, 500));
         
     }
 }
+
+const AuthLogin = async function (req, res, next) {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return next(new httpError("unable to login", 401));
+    }
+
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    next(new httpError(error.message));
+  }
+};
 
 
 

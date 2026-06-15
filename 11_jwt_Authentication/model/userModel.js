@@ -1,6 +1,7 @@
 
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import JWT from "jsonwebtoken"
 
 const userScheme = new mongoose.Schema({
 
@@ -24,7 +25,15 @@ const userScheme = new mongoose.Schema({
                 throw new Error("password can not set as a password")
             }
         }
+    },
+    tokens: [
+  {
+    token: {
+      type: String,
+      required: true
     }
+  }
+],
 },
     {
         timestamps: true
@@ -63,7 +72,34 @@ userScheme.statics.findByCredentials = async function (Email, password) {
 }
 
 
-userScheme.methods.generateAuthToken = async function () {}
+userScheme.methods.generateAuthToken = async function () {
+
+      try {
+    const user = this;
+
+    // console.log("JWT_SECRET =", process.env.JWT_SECRET);
+
+    const token = JWT.sign(
+      { _id: user._id.toString() },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" },
+    );
+
+    // console.log("Generated token =", token);
+
+    if (!token) {
+      throw new Error("failed to generate token");
+    }
+
+    user.tokens = user.tokens.concat({ token });
+
+    await user.save();
+
+    return token;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 
 const modelUser = mongoose.model("user", userScheme)
