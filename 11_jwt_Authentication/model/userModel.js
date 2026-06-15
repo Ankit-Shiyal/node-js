@@ -63,6 +63,9 @@ userScheme.statics.findByCredentials = async function (Email, password) {
 }
 
 
+userScheme.methods.generateAuthToken = async function () {}
+
+
 const modelUser = mongoose.model("user", userScheme)
 
 export default modelUser;

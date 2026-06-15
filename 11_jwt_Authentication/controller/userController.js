@@ -24,7 +24,6 @@ const add = async (req, res, next)=>{
 
 }
 
-
 const getAllUser = async (req, res, next)=>{
 
     try {
@@ -62,6 +61,8 @@ const login = async (req, res, next)=>{
         
     }
 }
+
+
 
 export default {add , getAllUser, login}
 
