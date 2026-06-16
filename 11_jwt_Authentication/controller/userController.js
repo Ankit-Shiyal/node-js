@@ -80,7 +80,7 @@ const AuthLogin = async function (req, res, next) {
 
 
 
-export default {add , getAllUser, login}
+export default {add , getAllUser, login, AuthLogin}
 
 
 
