@@ -1,14 +1,14 @@
 import { model } from "mongoose"
 import modelUser from "../model/userModel.js"
 import HttpError from "../middleware/HttpError.js"
-const add = async (req, res, next)=>{
+const add = async (req, res, next) => {
 
     try {
-        
-        const {name, Email , password}= req.body
+
+        const { name, Email, password } = req.body
 
         const newUser = new modelUser({
-            
+
             name,
             Email,
             password
@@ -16,88 +16,152 @@ const add = async (req, res, next)=>{
 
         await newUser.save()
 
-        res.status(201).json({success:true , message:"new User added successfully", newUser})
+        res.status(201).json({ success: true, message: "new User added successfully", newUser })
     } catch (error) {
-         next(new HttpError(error.message, 500));
-        
+        // console.log(error);
+
+        next(new HttpError(error.message, 500));
+
     }
 
 }
 
-const getAllUser = async (req, res, next)=>{
+const getAllUser = async (req, res, next) => {
 
     try {
-        
+
         const Users = await modelUser.find();
 
-        if(!Users){
-            return next(new HttpError ("not user data found", 404))
+        if (!Users) {
+            return next(new HttpError("not user data found", 404))
         }
 
-        res.status(200).json({success : true, Total:Users.length ,message:"User data found ", Users})
+        res.status(200).json({ success: true, Total: Users.length, message: "User data found ", Users })
 
     } catch (error) {
-         next(new HttpError(error.message, 500));
+        // console.log(error);
+
+        next(new HttpError(error.message, 500));
     }
 }
 
-const login = async (req, res, next)=>{
+const login = async (req, res, next) => {
 
     try {
-        
 
-        const {Email, password}= req.body;
 
-        const Users = await modelUser.findByCredentials(Email , password)
+        const { Email, password } = req.body;
 
-         const token = await Users.generateAuthToken();
+        const Users = await modelUser.findByCredentials(Email, password)
 
-        if(!Users){
-            return next (new HttpError ("unable to login"))
+        const token = await Users.generateAuthToken();
+
+        if (!Users) {
+            return next(new HttpError("unable to login"))
         }
 
-        res.status(200).json({success:true, Users, token})
+        res.status(200).json({ success: true, Users, token })
 
     } catch (error) {
-         next(new HttpError(error.message, 500));
-        
+        // console.log(error);
+
+        next(new HttpError(error.message, 500));
+
     }
 }
 
 const AuthLogin = async function (req, res, next) {
-  try {
-    const user = req.user;
-    // console.log("auth user", user)
+    try {
+        const user = req.user;
+        // console.log("auth user", user)
 
-    if (!user) {
-      return next(new httpError("unable to login", 401));
+        if (!user) {
+            return next(new httpError("unable to login", 401));
+        }
+
+        res.status(200).json({ success: true, user });
+    } catch (error) {
+        // console.log(error);
+
+        next(new HttpError(error.message, 500));
+
     }
-
-    res.status(200).json({ success: true, user });
-  } catch (error) {
-    next(new httpError(error.message));
-  }
 };
 
 
-const deleteUser = async (req, res, next)=>{
+const deleteUser = async (req, res, next) => {
 
     try {
-        
+
         const user = req.user
+        // console.log("user", user)
+
 
         await user.deleteOne()
 
-         res.status(200).json({ success: true, message:"user delete successfully" });
+        res.status(200).json({ success: true, message: "user delete successfully" });
 
 
     } catch (error) {
-    next(new httpError(error.message));
-        
+        // console.log(error);
+
+        next(new HttpError(error.message, 500));
+
+
     }
 }
 
-export default {add , getAllUser, login, AuthLogin, deleteUser}
+
+const updateUser = async (req, res, next) => {
+
+    try {
+
+        const user = req.user
+        // console.log("user", user)
+
+
+        const updates = Object.keys(req.body)
+
+        const allowedFiled = [
+            "name",
+            "password"
+        ];
+
+        const isValidUpdate = updates.every((field) => {
+            return allowedFiled.includes(field);
+        });
+
+        if (!isValidUpdate) {
+            return next(
+                new HttpError("only allowed field can be updated", 400));
+        }
+
+        updates.forEach((update) => {
+            user[update] =
+                req.body[update];
+        });
+
+        await user.save();
+
+        res.status(200).json({
+            message:
+                "user data updated successfully",
+            user
+        });
+
+
+
+    } catch (error) {
+        // console.log(error);
+        next(new HttpError(error.message, 500));
+
+
+    }
+}
+
+
+
+export default { add, getAllUser, login, AuthLogin, deleteUser, updateUser }
 
 
 

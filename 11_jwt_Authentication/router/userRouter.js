@@ -11,5 +11,9 @@ router.post("/Login", userController.login)
 router.get("/authLogin", auth, userController.AuthLogin)
 router.delete("/delete", auth, userController.deleteUser)
 
+router.patch("/update", auth, userController.updateUser)
+
+
+
 
 export default router;
