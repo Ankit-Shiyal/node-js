@@ -67,6 +67,7 @@ const login = async (req, res, next)=>{
 const AuthLogin = async function (req, res, next) {
   try {
     const user = req.user;
+    // console.log("auth user", user)
 
     if (!user) {
       return next(new httpError("unable to login", 401));
@@ -79,8 +80,24 @@ const AuthLogin = async function (req, res, next) {
 };
 
 
+const deleteUser = async (req, res, next)=>{
 
-export default {add , getAllUser, login, AuthLogin}
+    try {
+        
+        const user = req.user
+
+        await user.deleteOne()
+
+         res.status(200).json({ success: true, message:"user delete successfully" });
+
+
+    } catch (error) {
+    next(new httpError(error.message));
+        
+    }
+}
+
+export default {add , getAllUser, login, AuthLogin, deleteUser}
 
 
 

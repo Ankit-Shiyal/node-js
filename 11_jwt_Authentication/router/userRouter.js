@@ -9,5 +9,7 @@ router.post("/add", userController.add)
 router.get("/AllUser", userController.getAllUser)
 router.post("/Login", userController.login)
 router.get("/authLogin", auth, userController.AuthLogin)
+router.delete("/delete", auth, userController.deleteUser)
+
 
 export default router;
