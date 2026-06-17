@@ -48,11 +48,9 @@ userScheme.pre("save", async function () {
 });
 
 userScheme.statics.findByCredentials = async function (Email, password) {
-
     try {
-
         const user = await this.findOne({ Email })
-
+        console.log(user)
         if (!user) {
             throw new Error("unable to login");
         }
@@ -62,23 +60,16 @@ userScheme.statics.findByCredentials = async function (Email, password) {
         if (!isMatch) {
             throw new Error("unable to login");
         }
-
-
         return user;
     } catch (error) {
         throw new Error(error.message);
     }
-
 }
 
-
 userScheme.methods.generateAuthToken = async function () {
-
     try {
         const user = this;
-
         // console.log("JWT_SECRET =", process.env.JWT_SECRET);
-
         const token = JWT.sign(
             { _id: user._id.toString() },
             process.env.JWT_SECRET,
@@ -100,7 +91,6 @@ userScheme.methods.generateAuthToken = async function () {
         throw new Error(error.message);
     }
 }
-
 
 const modelUser = mongoose.model("user", userScheme)
 

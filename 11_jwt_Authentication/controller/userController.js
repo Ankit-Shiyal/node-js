@@ -1,36 +1,31 @@
 import { model } from "mongoose"
 import modelUser from "../model/userModel.js"
 import HttpError from "../middleware/HttpError.js"
+
 const add = async (req, res, next) => {
-
     try {
-
         const { name, Email, password } = req.body
 
         const newUser = new modelUser({
-
             name,
             Email,
             password
         })
 
         await newUser.save()
+        // console.log(newUser)
 
         res.status(201).json({ success: true, message: "new User added successfully", newUser })
     } catch (error) {
         // console.log(error);
-
         next(new HttpError(error.message, 500));
-
     }
-
 }
 
 const getAllUser = async (req, res, next) => {
-
     try {
-
         const Users = await modelUser.find();
+        console.log(Users)
 
         if (!Users) {
             return next(new HttpError("not user data found", 404))
@@ -40,21 +35,19 @@ const getAllUser = async (req, res, next) => {
 
     } catch (error) {
         // console.log(error);
-
         next(new HttpError(error.message, 500));
     }
 }
 
 const login = async (req, res, next) => {
-
     try {
-
-
         const { Email, password } = req.body;
 
         const Users = await modelUser.findByCredentials(Email, password)
+        // console.log(Users)
 
         const token = await Users.generateAuthToken();
+        // console.log(token)
 
         if (!Users) {
             return next(new HttpError("unable to login"))
@@ -64,9 +57,7 @@ const login = async (req, res, next) => {
 
     } catch (error) {
         // console.log(error);
-
         next(new HttpError(error.message, 500));
-
     }
 }
 
@@ -82,44 +73,29 @@ const AuthLogin = async function (req, res, next) {
         res.status(200).json({ success: true, user });
     } catch (error) {
         // console.log(error);
-
         next(new HttpError(error.message, 500));
-
     }
 };
 
-
 const deleteUser = async (req, res, next) => {
-
     try {
-
         const user = req.user
         // console.log("user", user)
-
 
         await user.deleteOne()
 
         res.status(200).json({ success: true, message: "user delete successfully" });
 
-
     } catch (error) {
         // console.log(error);
-
         next(new HttpError(error.message, 500));
-
-
     }
 }
 
-
 const updateUser = async (req, res, next) => {
-
     try {
-
         const user = req.user
         // console.log("user", user)
-
-
         const updates = Object.keys(req.body)
 
         const allowedFiled = [
@@ -149,19 +125,46 @@ const updateUser = async (req, res, next) => {
             user
         });
 
+    } catch (error) {
+        // console.log(error);
+        next(new HttpError(error.message, 500));
+    }
+}
 
+const logOut = async (req, res, next) => {
+    try {
+        const user = req.user
+        // console.log("user", user)
+
+        user.tokens = user.tokens.filter((t) => t.token != req.token);
+
+        await user.save()
+
+        res.status(200).json({ success: true, message: "user log out successfully" });
+
+    } catch (error) {
+        // console.log(error);
+        next(new HttpError(error.message, 500));
+    }
+}
+
+const logoutALL = async (req, res, next) => {
+    try {
+        req.user.tokens = []
+        // console.log("user", user)
+
+        await req.user.save()
+
+        res.status(200).json({ success: true, message: "user log out from all successfully" });
 
     } catch (error) {
         // console.log(error);
         next(new HttpError(error.message, 500));
 
-
     }
 }
 
-
-
-export default { add, getAllUser, login, AuthLogin, deleteUser, updateUser }
+export default { add, getAllUser, login, AuthLogin, deleteUser, updateUser, logOut, logoutALL }
 
 
 

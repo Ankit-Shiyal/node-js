@@ -1,9 +1,7 @@
 
-
 import express from "express";
 
 import dotenv from "dotenv";
-
 dotenv.config({ path: "./.env" });
 
 import HttpError from "./middleware/HttpError.js";
@@ -37,34 +35,24 @@ app.use((error, req, res, next) => {
 
 const port = 5000;
 
-
-
 async function serverStart() {
-
 
     try {
 
         const connect = await connectDB();
-
         if (!connect) {
             return next(new HttpError("failed to connect DB"))
         }
-
         app.listen(port, (err) => {
             if (err) {
                 return console.log(err.message)
             }
-
             console.log(`server running on port ${port}`)
         })
 
     } catch (error) {
-
         console.log(error.message)
-
         process.exit(1)
-
     }
-
 }
 serverStart()

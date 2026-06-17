@@ -10,10 +10,8 @@ router.get("/AllUser", userController.getAllUser)
 router.post("/Login", userController.login)
 router.get("/authLogin", auth, userController.AuthLogin)
 router.delete("/delete", auth, userController.deleteUser)
-
 router.patch("/update", auth, userController.updateUser)
-
-
-
+router.get("/logOut", auth, userController.logOut)
+router.get("/LogoutAll", auth, userController.logoutALL)
 
 export default router;
