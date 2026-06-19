@@ -6,7 +6,7 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "destiNova",
+    folder: "traveling",
     allowed_formats: ["jpg", "png", "jpeg", "webp"],
     transformation: [
       {

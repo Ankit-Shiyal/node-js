@@ -28,7 +28,10 @@ const packageScheme = new mongoose.Schema({
         type: Date,
         required: true
     },
-  
+    packageDescription: {
+        type: String,
+        required: true,
+    },
     packageImages: {
         type: String,
         required: true
