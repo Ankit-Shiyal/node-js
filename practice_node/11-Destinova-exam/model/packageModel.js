@@ -1,8 +1,4 @@
-
-
-
 import mongoose from "mongoose";
-
 const packageScheme = new mongoose.Schema({
 
     packageName: {
@@ -14,11 +10,6 @@ const packageScheme = new mongoose.Schema({
         type: Number,
         required: true
     },
-    packageDestination: {
-        type: String,
-        required: true,
-        trim: true
-    },
     StartDate: {
         type: Date,
         required: true
@@ -28,7 +19,7 @@ const packageScheme = new mongoose.Schema({
         type: Date,
         required: true
     },
-    packageDescription: {
+    Description: {
         type: String,
         required: true,
     },

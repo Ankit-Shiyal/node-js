@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/add", upload.single("packageImages"), packageController.add);
 
-router.get("/allPackage", packageController.getAllPackage)
+router.get("/allPackage", packageController.getAll)
 router.get("/:id", packageController.getById)
 
 router.delete("/:id", packageController.deletePackage)
