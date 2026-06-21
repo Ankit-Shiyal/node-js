@@ -162,6 +162,9 @@ const logoutALL = async (req, res, next) => {
     }
 }
 
+
+
+
 export default { add, getAllUser, login, AuthLogin, deleteUser, updateUser, logOut, logoutALL }
 
 
