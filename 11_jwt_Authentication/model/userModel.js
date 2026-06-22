@@ -92,6 +92,29 @@ userScheme.methods.generateAuthToken = async function () {
     }
 }
 
+userScheme.methods.toJSON = function () {
+
+
+  const user = this;
+
+//   console.log("user", user)
+
+  const userObject = user.toObject();
+
+
+//   console.log("userObject", userObject)
+
+  delete userObject.password;
+
+  delete userObject.tokens;
+
+  delete userObject.__v
+
+  return userObject
+
+}
+
+
 const modelUser = mongoose.model("user", userScheme)
 
 export default modelUser;
