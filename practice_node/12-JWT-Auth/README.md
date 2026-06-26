@@ -121,125 +121,54 @@ This project demonstrates secure user authentication with registration, login, p
 
 ## ➜ Register User
 
-**POST** `/user/add`
 
-📸 **Screenshot**
 
-> Add your Postman screenshot here.
+<img width="700" alt="Screenshot 2026-06-26 115837" src="https://github.com/user-attachments/assets/38228aa2-dbec-447c-a1c2-7ec7d2293b40" />
 
----
 
 ## ➜ Get All Users
 
-**GET** `/user/AllUser`
 
-📸 **Screenshot**
+<img width="700" alt="Screenshot 2026-06-26 115940" src="https://github.com/user-attachments/assets/17e25dd9-472b-4cff-89f0-ab86aa9eb5c4" />
 
-> Add your Postman screenshot here.
-
----
 
 ## ➜ Login User
 
-**POST** `/user/Login`
+<img width="700" alt="Screenshot 2026-06-26 115955" src="https://github.com/user-attachments/assets/b51acf28-60ac-4ebc-bc06-d255de25e69d" />
 
-📸 **Screenshot**
 
-> Add your Postman screenshot here.
-
-Returns
-
-```json
-{
-  "success": true,
-  "Users": {},
-  "token": "JWT_TOKEN"
-}
-```
-
----
 
 ## ➜ Get Authenticated User
 
-**GET** `/user/authLogin`
 
-Header
 
-```http
-Authorization: Bearer YOUR_TOKEN
-```
+<img width="700" alt="Screenshot 2026-06-26 120009" src="https://github.com/user-attachments/assets/39222e29-cd13-49dd-8e4e-21a8809ac85c" />
 
-📸 **Screenshot**
-
-> Add your Postman screenshot here.
-
----
 
 ## ➜ Update User
 
-**PATCH** `/user/update`
 
-Header
 
-```http
-Authorization: Bearer YOUR_TOKEN
-```
+<img width="700" alt="Screenshot 2026-06-26 120040" src="https://github.com/user-attachments/assets/76721a5f-a78b-485d-8e3d-26748fad7031" />
 
-Body
-
-```json
-{
-    "name":"Ankit Shiyal"
-}
-```
-
-📸 **Screenshot**
-
-> Add your Postman screenshot here.
-
----
 
 ## ➜ Delete User
 
-**DELETE** `/user/delete`
 
-Header
 
-```http
-Authorization: Bearer YOUR_TOKEN
-```
-
-📸 **Screenshot**
-
-> Add your Postman screenshot here.
-
----
+<img width="700" alt="Screenshot 2026-06-26 120050" src="https://github.com/user-attachments/assets/4b734e5d-988c-42bd-aa54-1c6c9f68c723" />
 
 ## ➜ Logout User
 
-**GET** `/user/logOut`
+<img width="700" alt="Screenshot 2026-06-26 120020" src="https://github.com/user-attachments/assets/ac961a1e-8795-462c-babf-09e939bf1e4c" />
 
-Header
-
-```http
-Authorization: Bearer YOUR_TOKEN
-```
-
-📸 **Screenshot**
-
-> Add your Postman screenshot here.
-
----
 
 ## ➜ Logout From All Devices
 
-**GET** `/user/LogoutAll`
 
-Header
 
-```http
-Authorization: Bearer YOUR_TOKEN
-```
+<img width="700" alt="Screenshot 2026-06-26 120028" src="https://github.com/user-attachments/assets/907aa5c3-fc01-41f3-9762-ece9e4ae1395" />
+
 
 📸 **Screenshot**
 
@@ -311,41 +240,6 @@ You can test all APIs using:
 * Postman
 * Thunder Client
 * Insomnia
-
----
-
-# 📦 Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/yourusername/12-JWT-AUTH.git
-```
-
-Install dependencies
-
-```bash
-npm install
-```
-
-Create `.env`
-
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
-
-Run the project
-
-```bash
-npm run dev
-```
-
-Server Running
-
-```bash
-http://localhost:5000
-```
 
 ---
 
