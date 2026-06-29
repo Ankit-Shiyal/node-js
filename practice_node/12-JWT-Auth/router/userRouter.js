@@ -14,4 +14,5 @@ router.get("/LogoutAll", auth, userController.logoutALL)
 router.delete("/delete", auth, userController.deleteUser)
 router.patch("/update", auth, userController.updateUser)
 
+
 export default router;

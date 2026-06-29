@@ -54,6 +54,5 @@ async function startServer() {
 
         process.exit(1)
     }
-    
 }
 startServer()

@@ -12,8 +12,6 @@ async function connectDB() {
 
     } catch (error) {
         throw new Error(error.message)
-
-
     }
 
 }

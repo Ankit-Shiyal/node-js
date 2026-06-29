@@ -12,7 +12,6 @@ const add = async (req, res, next) => {
             Email,
             password
         })
-
         await newUser.save()
 
         res.status(201).json({ success: true, message: "new User added successfully", newUser })

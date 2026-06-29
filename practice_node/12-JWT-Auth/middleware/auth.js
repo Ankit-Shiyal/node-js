@@ -9,6 +9,7 @@ const auth = async (req, res, next) => {
         if (!authHeader) {
             return next(new HttpError("auth header is required", 401));
         }
+        
         const token = authHeader.replace("Bearer ", "");
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

@@ -7,8 +7,12 @@ dotenv.config({ path: "./.env" });
 import HttpError from "./middleware/HttpError.js";
 import connectDB from "./config/db.js";
 import authRouter from "./router/authRouter.js"
+import passport from "./config/passport.js";
+
 
 const app = express();
+
+app.use(passport.initialize());
 
 app.use(express.json());
 
