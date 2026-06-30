@@ -12,8 +12,9 @@ router.get("/google/login", passport.authenticate("google", { scope: [["email"],
 
 router.get("/google/redirect", passport.authenticate("google", { failureRedirect: "/" }),(req, res) => {
 
-  res.send("this is callback url")
+  res.render("profile")
 })
+
 
 
 export default router;

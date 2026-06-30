@@ -1,6 +1,6 @@
 
 import express from "express";
-
+import session from "express-session";
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
@@ -9,18 +9,32 @@ import connectDB from "./config/db.js";
 import authRouter from "./router/authRouter.js"
 import passport from "./config/passport.js";
 
-
 const app = express();
 
-app.use(passport.initialize());
+
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000,
+        }
+    })
+)
 
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/auth", authRouter);
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res, ) => {
+app.get("/", (req, res,) => {
     res.render("home");
 })
 
