@@ -7,11 +7,10 @@ dotenv.config({ path: "./.env" });
 import HttpError from "./middleware/HttpError.js";
 import connectDB from "./config/db.js";
 import authRouter from "./router/authRouter.js"
+import profileRouter from "./router/profileRouter.js"
 import passport from "./config/passport.js";
 
 const app = express();
-
-
 
 app.use(
     session({
@@ -31,12 +30,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res,) => {
-    res.render("home");
-})
+app.get("/", (req, res) => {
+    res.render("home", { user: req.user });
+});
 
 app.use((req, res, next) => {
     return next(new HttpError("requited routs not found ", 404))

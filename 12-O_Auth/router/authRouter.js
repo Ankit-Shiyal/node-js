@@ -10,10 +10,23 @@ router.get("/login", (req, res) => {
 
 router.get("/google/login", passport.authenticate("google", { scope: [["email"], ["profile"]] }))
 
-router.get("/google/redirect", passport.authenticate("google", { failureRedirect: "/" }),(req, res) => {
+router.get(
+  "/google/redirect",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/profile");
+  }
+);
 
-  res.render("profile")
-})
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      next(new HttpError("failed to logOut"));
+    }
+  });
+
+  res.redirect("/");
+});
 
 
 
