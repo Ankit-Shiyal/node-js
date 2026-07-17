@@ -30,11 +30,11 @@ const auth = async (req, res, next) => {
 
         req.user = user;
 
-        console.log("user:", user)
+        // console.log("user:", user)
         
         req.token = token;
 
-        console.log("token: ", token)
+        // console.log("token: ", token)
 
         next();
     } catch (error) {

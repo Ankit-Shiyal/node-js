@@ -95,22 +95,22 @@ userScheme.methods.generateAuthToken = async function () {
 userScheme.methods.toJSON = function () {
 
 
-  const user = this;
+    const user = this;
 
-//   console.log("user", user)
+    //   console.log("user", user)
 
-  const userObject = user.toObject();
+    const userObject = user.toObject();
 
 
-//   console.log("userObject", userObject)
+    //   console.log("userObject", userObject)
 
-  delete userObject.password;
+    delete userObject.password;
 
-  delete userObject.tokens;
+    delete userObject.tokens;
 
-  delete userObject.__v
+    delete userObject.__v
 
-  return userObject
+    return userObject
 
 }
 
