@@ -3,7 +3,7 @@
 import Joi from "joi";
 
 // validation
-const userSchema = Joi.object({
+export const registerSchema = Joi.object({
   Name: Joi.string().min(2).max(30).trim().required().messages({
     "string.base": "Name must be in String format",
     "string.min": "Name must be at least 2 character long",
@@ -37,4 +37,11 @@ const userSchema = Joi.object({
     }),
 });
 
-export default userSchema;
+export const updateUserSchema = registerSchema
+  .fork(["Name", "Address", "Phone", "Password"], (fields) => fields.optional())
+  .fork(["Role", "Email"], (fields) => fields.forbidden())
+  .or("Name", "Address", "Phone", "Password")
+  .messages({
+    "object.missing":
+      "Name, Address, Phone and Password  any one required to update ",
+  });

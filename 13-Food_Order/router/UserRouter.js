@@ -4,7 +4,7 @@ import express from "express"
 
 // local modules
 import UserController from "../controller/UserController.js"
-import userSchema from "../validation/UserSchema.js" 
+import  { registerSchema } from "../validation/UserSchema.js" 
 import validate from "../middleware/validate.js";
 import auth from "../middleware/auth.js";
 import checkRole from "../middleware/checkRole.js";
