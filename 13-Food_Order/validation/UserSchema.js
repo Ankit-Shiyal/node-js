@@ -1,4 +1,3 @@
-
 // // external module
 import Joi from "joi";
 
@@ -21,7 +20,7 @@ export const registerSchema = Joi.object({
     "any.required": "Password ir required",
   }),
   Role: Joi.string().valid("customer", "admin").default("customer"),
-  Address:Joi.string().min(5).max(100).required().messages({
+  Address: Joi.string().min(5).max(100).required().messages({
     "string.base": "Address must be in string format",
     "string.min": "Address must be at least 5 character long",
     "string.max": "Address must be 100 character long",
@@ -32,15 +31,16 @@ export const registerSchema = Joi.object({
     .required()
     .messages({
       "string.base": "Phone must be in string format",
-      "string.pattern.base": "Phone number must be a valid 10-digit Indian mobile number",
+      "string.pattern.base":
+        "Phone number must be a valid 10-digit Indian mobile number",
       "any.required": "Phone is required",
     }),
 });
 
 export const updateUserSchema = registerSchema
-  .fork(["Name", "Address", "Phone", "Password"], (fields) => fields.optional())
+  .fork(["Name", "Address", "Phone"], (fields) => fields.optional())
   .fork(["Role", "Email"], (fields) => fields.forbidden())
-  .or("Name", "Address", "Phone", "Password")
+  .or("Name", "Address", "Phone" )
   .messages({
     "object.missing":
       "Name, Address, Phone and Password  any one required to update ",

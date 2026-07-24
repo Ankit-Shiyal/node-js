@@ -15,19 +15,17 @@ const add = async (req, res, next) => {
       Role,
       Address,
       Phone,
-      Profile_Pic:req.file?.path,
-      Cloudinary_Id:req.file.filename,
+      Profile_Pic: req.file?.path,
+      Cloudinary_Id: req.file.filename,
     });
 
     await newUser.save();
- 
+
     res.status(201).json({ success: true, message: "new User added", newUser });
   } catch (error) {
     next(new HttpError(error.message, 500));
   }
 };
-
-
 
 // login user
 const login = async (req, res, next) => {
@@ -64,55 +62,7 @@ const authLogin = async (req, res, next) => {
     .json({ success: true, message: "auth login successfully", user });
 };
 
-// delete user
-
-const deleteUser = async (req, res, next) => {
-  try {
-    const user = req.user;
-
-    await user.deleteOne();
-
-    res
-      .status(200)
-      .json({ success: true, message: "user data delete successfully" });
-  } catch (error) {
-    next(new HttpError(error.message));
-  }
-};
-
-// update user
-const updateUser = async (req, res, next) => {
-  try {
-    const user = req.user;
-
-    const updates = Object.keys(req.body);
-
-    const allowedFiled = ["Name", "Password", "Address", "Phone"];
-
-    const isValidUpdate = updates.every((filed) => {
-      return allowedFiled.includes(filed);
-    });
-
-    if (!isValidUpdate) {
-      return next(new HttpError("only allowed filed can update", 404));
-    }
-
-    updates.forEach((update) => {
-      user[update] = req.body[update];
-    });
-
-    await user.save();
-
-    res.status(200).json({
-      message: "user data updated successfully",
-      user,
-    });
-  } catch (error) {
-    next(new HttpError(error.message));
-  }
-};
-
-// update logout
+// logout
 const logout = async (req, res, next) => {
   try {
     const user = req.user;
@@ -164,13 +114,83 @@ const getAllUser = async (req, res, next) => {
   }
 };
 
+// delete user
+
+const deleteUser = async (req, res, next) => {
+  try {
+     const targetedUser = req.params.id || req.user._id;
+
+    const user = await modelUser.findById(targetedUser);
+
+    await cloudinary.uploader.destroy(user.Cloudinary_Id);
+
+    await user.deleteOne();
+
+    res
+      .status(200)
+      .json({ success: true, message: "user data delete successfully" });
+  } catch (error) {
+    next(new HttpError(error.message));
+  }
+};
+
+// update user
+const updateUser = async (req, res, next) => {
+  try {
+    const targetedUser = req.params.id || req.user._id;
+
+    const user = await modelUser.findById(targetedUser);
+
+    const updates = Object.keys(req.body);
+
+    
+    let allowedFiled = ["Name", "Address", "Phone"];
+
+      if (req.user.Role === "admin") {
+      allowedFiled = [...allowedFiled, "isVerified"];
+    }
+
+    const isValidUpdate = updates.every((filed) => {
+      return allowedFiled.includes(filed);
+    });
+
+    if (!isValidUpdate) {
+      return next(new HttpError("only allowed filed can update", 404));
+    }
+
+    if (req.file) {
+      if (user.Cloudinary_Id) {
+        await cloudinary.uploader.destroy(user.Cloudinary_Id);
+      }
+
+      user.Profile_Pic = req.file.path;
+
+      user.Cloudinary_Id = req.file.filename;
+    }
+
+    updates.forEach((update) => {
+      user[update] = req.body[update];
+    });
+
+    await user.save();
+
+    res.status(200).json({
+      message: "user data updated successfully",
+      user,
+    });
+  } catch (error) {
+    next(new HttpError(error.message));
+  }
+};
+
+
 export default {
   add,
   getAllUser,
   login,
   authLogin,
-  deleteUser,
-  updateUser,
   logout,
   logoutAll,
+  deleteUser,
+  updateUser,
 };

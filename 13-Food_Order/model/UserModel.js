@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 
 // mongoose schema
-const userScheme = await mongoose.Schema(
+const userScheme = new mongoose.Schema(
   {
     Name: {
       type: String,

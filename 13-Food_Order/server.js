@@ -1,41 +1,47 @@
 // external module
 import express from "express";
-import dotenv from "dotenv"
-dotenv.config({path :"./.env"})
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
 
 // local modules
 import HttpError from "./middleware/HttpError.js";
 import connectDB from "./config/db.js";
-import router from "./router/UserRouter.js";
+
+// router
+import UserRouter from "./router/UserRouter.js";
+import adminRouter from "./router/adminRouter.js";
+import RestaurantRouter from "./router/RestaurantRouter.js";
+import RestaurantModel from "./model/RestaurantModel.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/user", router);
+app.use("/user", UserRouter);
+app.use("/admin", adminRouter);
+app.use("/restaurant", RestaurantRouter);
 
 // server check
 app.get("/", (req, res) => {
-    res.json({ message: "hello from server" });
+  res.json({ message: "hello from server" });
 });
 
 app.use((req, res, next) => {
-    return next(new HttpError("requested route not found", 404));
+  return next(new HttpError("requested route not found", 404));
 });
-
 
 // centralize error
 app.use((error, req, res, next) => {
-    if (res.headersSent) {
-        return next(error);
-    }
+  if (res.headersSent) {
+    return next(error);
+  }
 
-    res
-        .status(error.statusCode || 500)
-        .json({ message: error.message || "internal server error " });
+  res
+    .status(error.statusCode || 500)
+    .json({ message: error.message || "internal server error " });
 });
 
-const port = 5000
+const port = 5000;
 
 async function serverStart() {
   try {
@@ -59,3 +65,16 @@ async function serverStart() {
 }
 
 serverStart();
+
+async function relationship() {
+  try {
+    const restaurantData = await RestaurantModel.findById(
+      "6a61ce966244e404b137047e",
+    ).populate("owner");
+    console.log(restaurantData);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+relationship();
