@@ -36,13 +36,10 @@ app.use((error, req, res, next) => {
         message: error.message || "something went wrong try again"
     });
 });
-
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 async function ServerStart() {
-
     try {
-
         const connect = await connectDB();
 
         if (!connect) {
@@ -54,10 +51,8 @@ async function ServerStart() {
         });
 
     } catch (error) {
-
         console.log(error.message);
         process.exit(1);
-
     }
 }
 
